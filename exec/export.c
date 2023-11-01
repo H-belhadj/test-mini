@@ -6,11 +6,32 @@
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 20:52:40 by hbelhadj          #+#    #+#             */
-/*   Updated: 2023/11/01 17:38:21 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/01 18:10:57 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*arr;
+	size_t	n;
+
+	if (!s)
+		return (NULL);
+	if (ft_strlen(s) < len)
+		len = ft_strlen(s);
+	arr = ft_calloc(len + 1, sizeof(char));
+	if (!arr)
+		return (NULL);
+	n = 0;
+	while (n < len && s[start + n])
+	{
+		arr[n] = s[start + n];
+		n++;
+	}
+	return (arr);
+}
 
 void    print_arr(char **arr)
 {
@@ -61,6 +82,23 @@ char    *get_export_key(char *arg)// key=value
         export a=word
         export a=
 */
+bool is_key_valid(char *key)
+{
+    int i;
+
+    if(key[0] == 0)
+        return (false);
+
+    if(!(key[0] == '_' || isalpha(key[0])))
+        return (false);
+    i = 0;
+    while(key[++i])
+    {
+        if(!(key[i] == '_' || isalnum(key[i])))
+            return (false);
+    }
+    return (true);
+}
 char    *get_export_value(char *arg, int key_length)
 {
     int value_length;
@@ -93,12 +131,13 @@ void    export(Node* envp, char **args)// args => args
         invalid keys:
             -   3lskdjf
             -   _lksdjf+
-            -   (empty string/no key)
+            -   (empty string/no key) OK
             -   +lksjdf
             -   jkhfkg.lfofof
-        if (!is_key_valid(key))
-            print not a valid identifier
         */
+        if (!is_key_valid(key))
+            printf("'%s' is not a valid identifier.\n", args[i]);
+        
         value = get_export_value(args[i], ft_strlen(key));
 
         entry = get_env_entry(envp, key);
@@ -119,3 +158,15 @@ void    export(Node* envp, char **args)// args => args
     }
     
 }
+
+/*
+  what can the key contain
+            -   only starts with _ or an alphabet
+            -   only contains _ , alphabets and digits
+        invalid keys:
+            -   3lskdjf
+            -   _lksdjf+
+            -   (empty string/no key)
+            -   +lksjdf
+            -   jkhfkg.lfofof
+*/
