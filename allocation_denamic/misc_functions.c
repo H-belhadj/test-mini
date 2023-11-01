@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   misc_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omakran <omakran@student.1337.ma >         +#+  +:+       +#+        */
+/*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 10:37:33 by omakran           #+#    #+#             */
-/*   Updated: 2023/10/27 10:37:38 by omakran          ###   ########.fr       */
+/*   Updated: 2023/11/01 16:57:11 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include "ft_malloc.h"
 
 void	destroy_node(t_address *node)
@@ -31,7 +32,7 @@ t_address	*create_node(void *ptr, unsigned int size)
 {
 	t_address	*node;
 
-	node = malloc(sizeof(t_address));
+	node = ft_calloc(1, sizeof(t_address));
 	if (node == NULL)
 		return (NULL);
 	node->size = size;

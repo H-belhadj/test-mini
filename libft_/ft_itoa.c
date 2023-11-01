@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omakran <omakran@student.1337.ma >         +#+  +:+       +#+        */
+/*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:13:03 by omakran           #+#    #+#             */
-/*   Updated: 2023/10/27 15:37:00 by omakran          ###   ########.fr       */
+/*   Updated: 2023/11/01 16:53:55 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*ft_itoa(int n)
 {
 	char	*str;
 
-	str = malloc(ft_size(n) * sizeof(char) + 1);
+	str = ft_calloc(1, ft_size(n) * sizeof(char) + 1);
 	if (!str)
 		exit (1);
 	ft_shortcut(n, str);

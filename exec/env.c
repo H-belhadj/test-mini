@@ -6,7 +6,7 @@
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 20:14:39 by hbelhadj          #+#    #+#             */
-/*   Updated: 2023/10/24 19:41:31 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/01 16:53:55 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Node *lst_new(char *key, char *value)
 {
-    Node* new_node = (Node*)malloc(sizeof(Node));
+    Node* new_node = (Node*)ft_calloc(1, sizeof(Node));
     new_node->key = key;
     new_node->value = value;
     new_node->next = NULL;

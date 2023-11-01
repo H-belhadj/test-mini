@@ -6,7 +6,7 @@
 #    By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 15:36:17 by omakran           #+#    #+#              #
-#    Updated: 2023/11/01 16:08:20 by hbelhadj         ###   ########.fr        #
+#    Updated: 2023/11/01 16:46:27 by hbelhadj         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ SOURCE = minishell.c ./lexer/tokens.c ./parser/sort_cmds.c  cmp.c  ./parser/expa
 CC = cc
 
 #brew install readline
-CFLAGS = -fsanitize=address -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I. #-fsanitize=address -g 
 
-READLINE = -lreadline -L/goinfre/hbelhadj/.brew/opt/readline/lib
+READLINE =  -L/goinfre/hbelhadj/.brew/opt/readline/lib -lreadline
 
 OBJS = $(SOURCE:.c=.o)
 
@@ -34,11 +34,11 @@ LIBFT=libft_/libft.a
 ALLOCATION=allocation_denamic/ft_malloc.a
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I. -c $< -o $@
+	$(CC) $(CFLAGS) -I/goinfre/hbelhadj/.brew/opt/readline/include/ -c $< -o $@
 
 $(NAME): $(OBJS)
 	make -C libft_
-	$(CC) $(CFLAGS) $(OBJS) -I . /goinfre/hbelhadj/.brew/opt/readline/include -o $(NAME) $(READLINE) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(READLINE) $(LIBFT)
 
 clean:
 	$(RM) $(OBJS)
