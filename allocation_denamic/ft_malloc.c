@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omakran <omakran@student.1337.ma >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 10:33:21 by omakran           #+#    #+#             */
-/*   Updated: 2023/11/01 16:56:49 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/10/27 10:39:08 by omakran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "ft_malloc.h"
 #include <stdlib.h>
 
@@ -19,7 +18,7 @@ static void	*allocate_memory(unsigned int size, t_address **addresses)
 	void		*ptr;
 	t_address	*node;
 
-	ptr = ft_calloc(1, size);
+	ptr = malloc(size);
 	if (ptr == NULL)
 		return (NULL);
 	node = create_node(ptr, size);
@@ -94,7 +93,7 @@ static void	*get_t_size(t_address *addresses, unsigned int *t_size)
 }
 
 /*
-- Allocates Memory using ft_calloc(1, ), Returns a pointer on success.
+- Allocates Memory using malloc(), Returns a pointer on success.
 - Has three types ALLOC, FREE, FREE_ALL, T_SIZE.
 - ALLOC to allocate memory for a pointer.
 - FREE to free a pointer.

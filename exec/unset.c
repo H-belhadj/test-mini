@@ -3,41 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omakran <omakran@student.1337.ma >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:49:22 by hbelhadj          #+#    #+#             */
-/*   Updated: 2023/11/01 18:23:47 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/02 16:31:02 by omakran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-void    ft_unset(Node* envp, char *str)// char **args
-{
-    char **arr;
-    Node *tmp;
-    Node    *tmp1;
+// void    ft_unset(Node* envp, char *str)// char **args
+// {
+//     char **arr;
+//     Node *tmp;
+//     Node    *tmp1;
 
-    tmp = envp;
-    arr = ft_split(str, '=');
-    envp = envp->next;
-    while(envp)
-    {
-        if(strcmp(envp->key, arr[0]) == 0)
-        {
-            tmp1 = envp->next;
-            free(envp->key);
-            free(envp->value);
-            free(envp);
-            tmp->next = tmp1;
-            break; 
-        }
-        tmp = tmp->next;
-        envp = envp->next;
-    }
-    _free(arr);
-}
+//     tmp = envp;
+//     arr = ft_split(str, '=');
+//     envp = envp->next;
+//     while(envp)
+//     {
+//         if(strcmp(envp->key, arr[0]) == 0)
+//         {
+//             tmp1 = envp->next;
+//             free(envp->key);
+//             free(envp->value);
+//             free(envp);
+//             tmp->next = tmp1;
+//             break; 
+//         }
+//         tmp = tmp->next;
+//         envp = envp->next;
+//     }
+//     _free(arr);
+// }
 
 void    ft_unset2(Node* envp, char **args)
 {
@@ -52,7 +52,7 @@ void    ft_unset2(Node* envp, char **args)
     while (args[++i])
     {
         key = args[i];
-        if (!is_valid_key(key))
+        if (!is_key_valid(key))
             printf("invalid key");
         else
         {

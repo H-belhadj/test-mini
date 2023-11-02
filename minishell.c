@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omakran <omakran@student.1337.ma >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:24:18 by omakran           #+#    #+#             */
-/*   Updated: 2023/11/01 16:54:31 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/02 16:36:13 by omakran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,48 @@ void	print_table_cmds(t_data_cmd *vars)
 		while (vars->cmds[i].operators[c])
 		{
 			// printf("OPERATOR[%d] => %s\nFILE[%d] => %s\n", c,
-				// vars->cmds[i].operators[c], c, vars->cmds[i].files[c]);
+			// 	vars->cmds[i].operators[c], c, vars->cmds[i].files[c]);
 			c++;
 		}
 		i++;
 	}
 }
 
-void	handler(int sig)
+// void	handler(int sig)
+// {
+// 	if (sig == SIGINT || sig == SIGQUIT)
+// 	{
+// 		printf("\n");
+// 		rl_on_new_line();
+// 		rl_replace_line("", 0);
+// 		rl_redisplay();
+// 		return ;
+// 	}
+// }
+
+int	handle_unclosed_quots(char *line)
 {
-	if (sig == SIGINT || sig == SIGQUIT)
+	int	i;
+	int	count_sq;
+	int	count_dq;
+
+	count_sq = 0;
+	count_dq = 0;
+	i = 0;
+	while (line[i])
 	{
-		printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-		return ;
+		if (line[i] == '\'')
+			count_sq++;
+		if (line[i] == '\"')
+			count_dq++;
+		i++;
 	}
+	if (count_sq % 2 != 0 || count_dq % 2 != 0)
+	{
+		ft_putstr_fd("minishell : syntax error unclosed quots\n", 2);
+		return (-1);
+	}
+	return (1);
 }
 
 int	main(int __unused argc, char __unused **argv, char __unused **env)
@@ -71,8 +96,8 @@ int	main(int __unused argc, char __unused **argv, char __unused **env)
 
 	if(argc != 1)
 		return (1);
-	signal(SIGINT, handler);
-	signal(SIGQUIT, handler);
+	// signal(SIGINT, handler);
+	// signal(SIGQUIT, handler);
 	vars = ft_malloc(sizeof(t_data_cmd), 0, ALLOC, 0);
 	if (!vars)
 		exit(1);

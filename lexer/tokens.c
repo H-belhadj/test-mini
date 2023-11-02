@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omakran <omakran@student.1337.ma >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:37:16 by omakran           #+#    #+#             */
-/*   Updated: 2023/11/01 16:54:31 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/02 16:01:38 by omakran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ char	**tokens(char *line)
 		count.i += count.arg_size;
 		count.i++;
 	}
-	count.new_tokens[count.dst_counter] = 0;
+	count.new_tokens[count.dst_counter] = NULL;
 	return (count.new_tokens);
 }

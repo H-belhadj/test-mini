@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omakran <omakran@student.1337.ma >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:55:08 by omakran           #+#    #+#             */
-/*   Updated: 2023/11/01 16:54:31 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/02 16:16:20 by omakran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ char	**remove_quotes(char **tokens)
 		tokens[i] = rm_quote(token);
 		i++;
 	}
+	tokens[i] = NULL;
 	return (tokens);
 }

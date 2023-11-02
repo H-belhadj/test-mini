@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execut.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omakran <omakran@student.1337.ma >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:32:20 by hbelhadj          #+#    #+#             */
-/*   Updated: 2023/10/29 19:05:06 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/02 16:30:38 by omakran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ int execut_builting(t_data_cmd *vars)
     else if(str_cmp(vars->cmds[0].cmd_args[0], "export"))
         export(vars->envp, vars->cmds[0].cmd_args);
     else if(str_cmp(vars->cmds[0].cmd_args[0], "unset"))
-        ft_unset(vars->envp, vars->cmds[0].cmd_args[1]);
+        ft_unset2(vars->envp, vars->cmds[0].cmd_args);
     else 
     {
         dup2(rfd, 0);

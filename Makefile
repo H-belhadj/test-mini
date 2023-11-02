@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+         #
+#    By: omakran <omakran@student.1337.ma >         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/27 15:36:17 by omakran           #+#    #+#              #
-#    Updated: 2023/11/01 16:46:27 by hbelhadj         ###   ########.fr        #
+#    Updated: 2023/11/02 16:32:31 by omakran          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,20 +34,20 @@ LIBFT=libft_/libft.a
 ALLOCATION=allocation_denamic/ft_malloc.a
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I/goinfre/hbelhadj/.brew/opt/readline/include/ -c $< -o $@
+	@$(CC) $(CFLAGS) -I/goinfre/hbelhadj/.brew/opt/readline/include/ -c $< -o $@
 
 $(NAME): $(OBJS)
-	make -C libft_
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(READLINE) $(LIBFT)
+	@make -C libft_
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(READLINE) $(LIBFT)
 
 clean:
-	$(RM) $(OBJS)
+	@$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
-	make -C libft_ fclean
+	@$(RM) $(NAME)
+	@make -C libft_ fclean
 
 re: fclean all
-	make -C libft_ fclean
+	@make -C libft_ fclean
 
 .PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: omakran <omakran@student.1337.ma >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 10:43:36 by omakran           #+#    #+#             */
-/*   Updated: 2023/10/28 12:58:24 by omakran          ###   ########.fr       */
+/*   Updated: 2023/11/02 16:18:43 by omakran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ char	*expand(char *token)
 		else
 			i++;
 	}
+	token [i] = '\0';
 	return (token);
 }
 
@@ -109,5 +110,6 @@ char	**expand_all_tokens(char **tokens)
 			tokens[i] = expand(tokens[i]);
 		i++;
 	}
+	tokens[i] = NULL;
 	return (tokens);
 }

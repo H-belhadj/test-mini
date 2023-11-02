@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omakran <omakran@student.1337.ma >         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:24:21 by omakran           #+#    #+#             */
-/*   Updated: 2023/11/01 16:32:27 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/02 16:31:31 by omakran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <limits.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <ctype.h> 
 
 struct s_help
 {
@@ -144,7 +145,8 @@ char	*ft_getenv(char *str, t_data_cmd *vars);
 char	*get_path(char *cmd, t_data_cmd *vars);
 void	execute_compund(t_data_cmd *cmd);
 void	ft_pwd(t_cmd *cmd);
-void    ft_unset(Node* envp, char *str);
+void    ft_unset2(Node* envp, char **args);
+bool is_key_valid(char *key);
 /*#################################################################*/
 
 /*###################### ERRORS FUNCTIONS #########################*/
