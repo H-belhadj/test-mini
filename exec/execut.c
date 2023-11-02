@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execut.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omakran <omakran@student.1337.ma >         +#+  +:+       +#+        */
+/*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:32:20 by hbelhadj          #+#    #+#             */
-/*   Updated: 2023/11/02 16:30:38 by omakran          ###   ########.fr       */
+/*   Updated: 2023/11/02 17:10:08 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,14 @@ void execute_siple(t_data_cmd *cmd, char **env)
     if (cmd->cmds->cmd_args[0] == NULL)
         return ;
     path = get_path(cmd->cmds[0].cmd_args[0], cmd);
+    if (str_cmp(cmd->cmds[0].cmd_args[0], "./minishell"))
+        path = "./minishell";
     pid = fork();
     if(pid == 0)
     {
         signal(SIGQUIT, SIG_DFL);
 	    signal(SIGINT, SIG_DFL);
-        if(path == 0)
+        if(path == 0 || str_cmp(cmd->cmds[0].cmd_args[0], ""))
         {
             printf("Command Not Found\n");
             exit(127);
@@ -144,7 +146,7 @@ void execute_siple(t_data_cmd *cmd, char **env)
         }
         if(execve(path, cmd->cmds->cmd_args, env) == -1)
         {
-            perror("execve\n");
+            printf("haitam\n");
             exit(126);
         }
     }
@@ -161,9 +163,13 @@ void execute_siple(t_data_cmd *cmd, char **env)
 void execut_all(t_data_cmd *vars, char **env)
 {
     if(vars->cmd_size == 1)
+    {
         execute_siple(vars, env);
+    }
     else
+    {
         execute_compund(vars);
+    }
 }
 
 int execut_builting(t_data_cmd *vars)

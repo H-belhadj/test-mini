@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utls_tokens_two.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omakran <omakran@student.1337.ma >         +#+  +:+       +#+        */
+/*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:14:42 by omakran           #+#    #+#             */
-/*   Updated: 2023/10/28 12:39:41 by omakran          ###   ########.fr       */
+/*   Updated: 2023/11/02 16:46:44 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ int	count_tokens(char *line)
 		if (ft_search("<>", line[count.i + count.arg_size]))
 			count.count_words++;
 		else if (ft_search("|", line[count.i + count.arg_size]))
+		{
 			count.count_words++;
+		}
 		count.i += count.arg_size;
 		count.i++;
 	}

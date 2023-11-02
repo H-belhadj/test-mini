@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omakran <omakran@student.1337.ma >         +#+  +:+       +#+        */
+/*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:24:18 by omakran           #+#    #+#             */
-/*   Updated: 2023/11/02 16:36:13 by omakran          ###   ########.fr       */
+/*   Updated: 2023/11/02 17:01:46 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,12 @@ int	main(int __unused argc, char __unused **argv, char __unused **env)
 		data._tokens = remove_quotes(data.gg);
 		vars->cmds = sort_cmds(data._tokens, vars);
 		print_table_cmds(vars);
-		syntax_errors(&vars->cmds[0], data._tokens);
+		if(syntax_errors(&vars->cmds[0], data._tokens))
+		{
+			ft_malloc(0, 0, FREE_ALL, 0);
+			free(data.line);
+			continue ;
+		}
 		execut_all(vars, env);
 		// ft_malloc(0, 0, FREE_ALL, 0);
 		// free(data.line);

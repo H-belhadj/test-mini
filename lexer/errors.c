@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omakran <omakran@student.1337.ma >         +#+  +:+       +#+        */
+/*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 09:38:06 by omakran           #+#    #+#             */
-/*   Updated: 2023/10/27 10:48:59 by omakran          ###   ########.fr       */
+/*   Updated: 2023/11/02 16:52:17 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,15 @@ int	check_pipes(char **tokens)
 	{
 		if (tokens[i] && str_cmp(tokens[i], "|") && (tokens[i + 1]
 				&& str_cmp(tokens[i + 1], "|")))
-			return (1);
+			{
+				// printf("hahahaahaahahh\n");
+				return (1);
+			}
 		else if (tokens[i] && str_cmp(tokens[i], "|") && !tokens[i + 1])
+		{
+			// printf("kajdsfjasakdjshh\n");
 			return (1);
+		}
 		i++;
 	}
 	return (0);
