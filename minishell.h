@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omakran <omakran@student.1337.ma >         +#+  +:+       +#+        */
+/*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:24:21 by omakran           #+#    #+#             */
-/*   Updated: 2023/11/02 16:31:31 by omakran          ###   ########.fr       */
+/*   Updated: 2023/11/02 18:23:02 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int		ft_exit_short(t_cmd *cmd);
 void	ft_exit(t_cmd *cmd);
 void   	print_arr(char **arr);
 char	*get_key(Node *envp, char *key);
-void    export(Node* envp, char **str);
+void    export(Node** head, char **args);
 void	ft_echo(t_cmd *cmd);
 char	*ft_getenv(char *str, t_data_cmd *vars);
 char	*get_path(char *cmd, t_data_cmd *vars);

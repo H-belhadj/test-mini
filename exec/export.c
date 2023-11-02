@@ -6,7 +6,7 @@
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 20:52:40 by hbelhadj          #+#    #+#             */
-/*   Updated: 2023/11/01 18:10:57 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/02 18:24:23 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char    *get_export_value(char *arg, int key_length)
     return (ft_substr(arg, key_length + 1, value_length));
 }
 
-void    export(Node* envp, char **args)// args => args
+void    export(Node** head, char **args)// args => args
 {
     Node    *entry;
     char    *key;
@@ -117,7 +117,7 @@ void    export(Node* envp, char **args)// args => args
     
     if(args[1] == NULL)
     {
-        get_env_export(envp);
+        get_env_export(*head);
         return;
     }
     int i = 0;
@@ -140,7 +140,7 @@ void    export(Node* envp, char **args)// args => args
         
         value = get_export_value(args[i], ft_strlen(key));
 
-        entry = get_env_entry(envp, key);
+        entry = get_env_entry(*head, key);
 
         //  if key already in env
         if (entry)
@@ -153,8 +153,10 @@ void    export(Node* envp, char **args)// args => args
             }
         }
         //  if key is not in env
+        if(*head)
+            lst_new(key, value);
         else
-            lstadd_back(&envp, lst_new(key, value));
+            lstadd_back(head, lst_new(key, value));
     }
     
 }
