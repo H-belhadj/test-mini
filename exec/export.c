@@ -6,7 +6,7 @@
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 20:52:40 by hbelhadj          #+#    #+#             */
-/*   Updated: 2023/11/02 21:53:37 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/03 19:39:24 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ void    export(Node** head, char **args)// args => args
                 entry->value = value;    
             }
         }
+        else
+            lstadd_back(head, lst_new(key, value));
         //  if key is not in env
         if(*head)
             lst_new(key, value);

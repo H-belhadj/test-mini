@@ -6,7 +6,7 @@
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 12:55:08 by omakran           #+#    #+#             */
-/*   Updated: 2023/11/02 17:04:53 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/03 19:23:25 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ char	**remove_quotes(char **tokens)
 		i++;
 	}
 	tokens[i] = NULL;
-	if (!tokens[0]) {
+	if (!tokens[0])
+	{
 		tokens = malloc(sizeof(char *) * (1));
 		tokens[0] = "";
 	}
