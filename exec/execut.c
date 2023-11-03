@@ -6,7 +6,7 @@
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:32:20 by hbelhadj          #+#    #+#             */
-/*   Updated: 2023/11/02 18:23:17 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:48:40 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void execute_siple(t_data_cmd *cmd, char **env)
 {
     int pid;
     char *path;
+    int status = 0;
     if(execut_builting(cmd))
         return ;
     if (cmd->cmds->cmd_args[0] == NULL)
@@ -131,7 +132,7 @@ void execute_siple(t_data_cmd *cmd, char **env)
 	    signal(SIGINT, SIG_DFL);
         if(path == 0 || str_cmp(cmd->cmds[0].cmd_args[0], ""))
         {
-            printf("Command Not Found\n");
+            ft_putstr_fd("Command Not Found\n", 2);
             exit(127);
         }
         if (cmd->cmds->fd_in > 0)
@@ -146,7 +147,7 @@ void execute_siple(t_data_cmd *cmd, char **env)
         }
         if(execve(path, cmd->cmds->cmd_args, env) == -1)
         {
-            printf("haitam\n");
+            ft_putstr_fd("execve Error\n", 2);
             exit(126);
         }
     }
@@ -156,8 +157,9 @@ void execute_siple(t_data_cmd *cmd, char **env)
             close(cmd->cmds->fd_in);
         if (cmd->cmds->fd_out > 0)
             close(cmd->cmds->fd_out);
-        waitpid(pid, NULL, 0);
+        waitpid(pid, &status, 0);
     }
+    s_help.exit_status = status / 256;
 }
 
 void execut_all(t_data_cmd *vars, char **env)

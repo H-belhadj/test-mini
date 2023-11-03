@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omakran <omakran@student.1337.ma >         +#+  +:+       +#+        */
+/*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 10:43:36 by omakran           #+#    #+#             */
-/*   Updated: 2023/11/02 16:18:43 by omakran          ###   ########.fr       */
+/*   Updated: 2023/11/03 16:59:18 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,34 +69,39 @@ int	var_size(char *token, int start)
 	return (size);
 }
 
-char	*expand(char *token)
+char    *expand(char *token)
 {
-	int		i;
-	char	*tmp;
-	char	*tmp2;
-	char	*var_name;
-	char	*var_value;
+    int        i;
+    char    *tmp;
+    char    *tmp2;
+    char    *var_name;
+    char    *var_value;
 
-	i = 0;
-	while (token[i])
-	{
-		if (is_eligible_to_expand(token, i, 0))
-		{
-			tmp = ft_substr(token, 0, i);
-			var_name = ft_substr(token, i + 1, var_size(token, i + 1));
-			var_value = getenv(var_name);
-			if (!var_value)
-				var_value = "";
-			tmp2 = ft_strjoin(var_value, (&token[i + 1 + var_size(token, i
-							+ 1)]));
-			token = ft_strjoin(tmp, tmp2);
-			i = 0;
-		}
-		else
-			i++;
-	}
-	token [i] = '\0';
-	return (token);
+    i = 0;
+    while (token[i])
+    {
+        if (is_eligible_to_expand(token, i, 0))
+        {
+            tmp = ft_substr(token, 0, i);
+            if (token[i + 1] && token[i + 1] == '?') {
+                var_value = ft_itoa(s_help.exit_status);
+                i++;
+            }else {
+                var_name = ft_substr(token, i + 1, var_size(token, i + 1));
+                var_value = getenv(var_name);
+                if (!var_value)
+                    var_value = "";
+            }
+            tmp2 = ft_strjoin(var_value, (&token[i + 1 + var_size(token, i
+                            + 1)]));
+            token = ft_strjoin(tmp, tmp2);
+            i = 0;
+        }
+        else
+            i++;
+    }
+    token [i] = '\0';
+    return (token);
 }
 
 char	**expand_all_tokens(char **tokens)

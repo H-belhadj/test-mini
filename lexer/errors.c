@@ -6,7 +6,7 @@
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 09:38:06 by omakran           #+#    #+#             */
-/*   Updated: 2023/11/02 16:52:17 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/02 21:46:53 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ int	check_pipes(char **tokens)
 	{
 		if (tokens[i] && str_cmp(tokens[i], "|") && (tokens[i + 1]
 				&& str_cmp(tokens[i + 1], "|")))
-			{
-				// printf("hahahaahaahahh\n");
-				return (1);
-			}
+					return (1);
+
 		else if (tokens[i] && str_cmp(tokens[i], "|") && !tokens[i + 1])
 		{
 			// printf("kajdsfjasakdjshh\n");
