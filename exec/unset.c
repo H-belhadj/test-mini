@@ -6,38 +6,11 @@
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 21:49:22 by hbelhadj          #+#    #+#             */
-/*   Updated: 2023/11/03 19:36:13 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/03 21:38:54 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
-// void    ft_unset(Node* envp, char *str)// char **args
-// {
-//     char **arr;
-//     Node *tmp;
-//     Node    *tmp1;
-
-//     tmp = envp;
-//     arr = ft_split(str, '=');
-//     envp = envp->next;
-//     while(envp)
-//     {
-//         if(strcmp(envp->key, arr[0]) == 0)
-//         {
-//             tmp1 = envp->next;
-//             free(envp->key);
-//             free(envp->value);
-//             free(envp);
-//             tmp->next = tmp1;
-//             break; 
-//         }
-//         tmp = tmp->next;
-//         envp = envp->next;
-//     }
-//     _free(arr);
-// }
 
 void    ft_unset2(Node* envp, char **args)
 {

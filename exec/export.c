@@ -6,7 +6,7 @@
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 20:52:40 by hbelhadj          #+#    #+#             */
-/*   Updated: 2023/11/03 19:39:24 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/03 21:37:33 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,6 @@ char    *get_export_key(char *arg)// key=value
     return (ft_substr(arg, 0, i));
 }
 
-/*
-    case 1;
-        export a
-    case 2:
-        export a=word
-        export a=
-*/
 bool is_key_valid(char *key)
 {
     int i;
@@ -109,7 +102,7 @@ char    *get_export_value(char *arg, int key_length)
     return (ft_substr(arg, key_length + 1, value_length));
 }
 
-void    export(Node** head, char **args)// args => args
+void    export(Node** head, char **args)
 {
     Node    *entry;
     char    *key;
@@ -124,17 +117,6 @@ void    export(Node** head, char **args)// args => args
     while(args[++i])
     {
         key = get_export_key(args[i]);
-        /*
-        what can the key contain
-            -   only starts with _ or an alphabet
-            -   only contains _ , alphabets and digits
-        invalid keys:
-            -   3lskdjf
-            -   _lksdjf+
-            -   (empty string/no key) OK
-            -   +lksjdf
-            -   jkhfkg.lfofof
-        */
         if (!is_key_valid(key))
             printf("'%s' is not a valid identifier.\n", args[i]);
         
@@ -142,7 +124,6 @@ void    export(Node** head, char **args)// args => args
 
         entry = get_env_entry(*head, key);
 
-        //  if key already in env
         if (entry)
         {
             free(key);
@@ -154,7 +135,6 @@ void    export(Node** head, char **args)// args => args
         }
         else
             lstadd_back(head, lst_new(key, value));
-        //  if key is not in env
         if(*head)
             lst_new(key, value);
         else
@@ -163,14 +143,3 @@ void    export(Node** head, char **args)// args => args
     
 }
 
-/*
-  what can the key contain
-            -   only starts with _ or an alphabet
-            -   only contains _ , alphabets and digits
-        invalid keys:
-            -   3lskdjf
-            -   _lksdjf+
-            -   (empty string/no key)
-            -   +lksjdf
-            -   jkhfkg.lfofof
-*/

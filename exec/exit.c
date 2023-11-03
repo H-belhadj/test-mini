@@ -6,7 +6,7 @@
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:38:07 by hbelhadj          #+#    #+#             */
-/*   Updated: 2023/10/21 11:51:32 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/03 21:38:03 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int ft_exit_short(t_cmd *cmd)
     int i;
 
     i = 0;
-    //check if the argument is not a numeric value
     if(!digit(cmd->cmd_args[1]))
     {
         ft_putstr_fd("minishell : exit: numeric argument required", 2);
@@ -45,7 +44,6 @@ int ft_exit_short(t_cmd *cmd)
         s_help.exit_status = 255;
         i = 1;
     }
-    //if the argument is numeric and there are not extra argument set the exit status
     else if(digit(cmd->cmd_args[1]) && cmd->cmd_args[2])
         s_help.exit_status = atoi(cmd->cmd_args[1]);
     

@@ -6,40 +6,34 @@
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 11:53:17 by hbelhadj          #+#    #+#             */
-/*   Updated: 2023/10/31 18:38:59 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/03 21:50:25 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_echo(t_cmd *cmd)
+void	ft_echo(t_cmd *cmd)
 {
-    int i = 1; // Start from 1 to skip the command name
-    int flag = 1;
+	int	i;
+	int	flag;
 
-    // Loop through the command arguments
-    while (cmd->cmd_args[i]) {
-        if (ft_strncmp(cmd->cmd_args[i], "-n", 2) == 0) {
-            flag = 0;
-        } else {
-            break; // Exit the loop if an argument is not the -n option
-        }
-        i++;
-    }
-
-    // Output the remaining arguments
-    while (cmd->cmd_args[i]) {
-        ft_putstr_fd(cmd->cmd_args[i], 1); // Output the argument
-        i++;
-
-        // Add a space after each argument
-        if (cmd->cmd_args[i]) {
-            write(1, " ", 1);
-        }
-    }
-
-    // Output a newline if the -n flag is not set
-    if (flag) {
-        write(1, "\n", 1);
-    }
+	i = 1;
+	flag = 1;
+	while (cmd->cmd_args[i])
+	{
+		if (ft_strncmp(cmd->cmd_args[i], "-n", 2) == 0) 
+			flag = 0;
+		else
+			break ;
+		i++;
+	}
+	while (cmd->cmd_args[i])
+	{
+		ft_putstr_fd(cmd->cmd_args[i], 1);
+		i++;
+		if (cmd->cmd_args[i])
+			write(1, " ", 1);
+	}
+	if (flag)
+		write(1, "\n", 1);
 }
