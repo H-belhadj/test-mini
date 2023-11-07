@@ -6,7 +6,7 @@
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 20:52:40 by hbelhadj          #+#    #+#             */
-/*   Updated: 2023/11/03 21:37:33 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/03 22:29:06 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ bool is_key_valid(char *key)
 
     if(key[0] == 0)
         return (false);
-
     if(!(key[0] == '_' || isalpha(key[0])))
         return (false);
     i = 0;

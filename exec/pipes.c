@@ -6,23 +6,24 @@
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:18:03 by hbelhadj          #+#    #+#             */
-/*   Updated: 2023/11/03 21:38:39 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:13:02 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
 void execute_compund(t_data_cmd *cmd)
 {
-    int pid;
-    int save = -1;
-    int i = -1;
-    int fd[2];
+    int     pid;
+    int     save;
+    int     i;
+    int     fd[2];
     char    *path;
 
     fd[0] = -1;
     fd[1] = -1;
+    save = -1;
+    i = -1;
     
     while (++i < cmd->cmd_size) 
     {
@@ -33,7 +34,6 @@ void execute_compund(t_data_cmd *cmd)
                 printf("Error \n");
                 exit(127);
             }
-            printf("fd[%d, %d]\n", fd[0], fd[1]);
         }
         
         pid = fork();
@@ -41,19 +41,15 @@ void execute_compund(t_data_cmd *cmd)
         { 
             // signal(SIGQUIT, SIG_DFL);
 	        // signal(SIGINT, SIG_DFL);
-            printf("[%s] %d %d %d\n",cmd->cmds[i].cmd_args[0], save, fd[0], fd[1]);
-            
             if (i == 0 && fd[1] != -1)
                 dup2(fd[1], STDOUT_FILENO);
             else if (i == cmd->cmd_size - 1 && save != -1)
-
                 dup2(save, STDIN_FILENO);
             else if (i < cmd->cmd_size - 1 && i > 0 && save != -1 && fd[1] != -1)
             {
                 dup2(save, STDIN_FILENO);
                 dup2(fd[1], STDOUT_FILENO);
             }
-            
             if (save != -1)
                 close(save);
             if (fd[0] != -1)
@@ -85,13 +81,9 @@ void execute_compund(t_data_cmd *cmd)
     waitpid(pid, (int *)raw_status, 0);
     printf("%d %d %d %d\n", raw_status[0], raw_status[1], raw_status[2], raw_status[3]);
     if (raw_status[0])
-    {
         s_help.exit_status = raw_status[0] + 128;
-    }
     else
-    {
         s_help.exit_status = raw_status[1];
-    }
     while (waitpid(-1, NULL, 0) != -1)
         ;
 }

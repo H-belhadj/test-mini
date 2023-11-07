@@ -6,7 +6,7 @@
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 10:04:15 by hbelhadj          #+#    #+#             */
-/*   Updated: 2023/11/03 21:55:48 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:23:39 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*get_path(char *cmd, t_data_cmd *vars)
 	char	*cmd_path;
 
 	i = -1;
+	if (access(cmd, F_OK) == 0)
+		return(cmd);
 	path = ft_getenv("PATH", vars);
 	if (!path)
 		return (NULL);
