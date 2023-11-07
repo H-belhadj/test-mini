@@ -21,7 +21,7 @@ void	ft_echo(t_cmd *cmd)
 	flag = 1;
 	while (cmd->cmd_args[i])
 	{
-		if (ft_strncmp(cmd->cmd_args[i], "-n", 2) == 0) 
+		if (ft_strncmp(cmd->cmd_args[i], "-n", 2) == 0)
 			flag = 0;
 		else
 			break ;

@@ -22,7 +22,7 @@ char	*get_path(char *cmd, t_data_cmd *vars)
 
 	i = -1;
 	if (access(cmd, F_OK) == 0)
-		return(cmd);
+		return (cmd);
 	path = ft_getenv("PATH", vars);
 	if (!path)
 		return (NULL);

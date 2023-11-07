@@ -33,112 +33,108 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (arr);
 }
 
-void    print_arr(char **arr)
+void	print_arr(char **arr)
 {
-    int i;
+	int	i;
 
-    i = -1;
-    if (!arr)
-        return ;
-    while (arr[++i])
-        printf("arr[%d]: %s\n", i, arr[i]);
+	i = -1;
+	if (!arr)
+		return ;
+	while (arr[++i])
+		printf("arr[%d]: %s\n", i, arr[i]);
 }
 
-char *get_key(Node *envp, char *key)
+char	*get_key(Node *envp, char *key)
 {
-    while(envp)
-    {
-        if(strcmp(envp->key, key) == 0)
-          return (key);          
-        envp = envp->next;
-    }
-    return (NULL);
+	while (envp)
+	{
+		if (strcmp(envp->key, key) == 0)
+			return (key);
+		envp = envp->next;
+	}
+	return (NULL);
 }
 
-Node *get_env_entry(Node *envp, char *key)
+Node	*get_env_entry(Node *envp, char *key)
 {
-    while(envp)
-    {
-        if(strcmp(envp->key, key) == 0)
-          return (envp);          
-        envp = envp->next;
-    }
-    return (NULL);
+	while (envp)
+	{
+		if (strcmp(envp->key, key) == 0)
+			return (envp);
+		envp = envp->next;
+	}
+	return (NULL);
 }
 
-char    *get_export_key(char *arg)// key=value
+char	*get_export_key(char *arg) // key=value
 {
-    int i = 0;
+	int i = 0;
 
-    while (arg[i] && arg[i] != '=')
-        i++;
-    return (ft_substr(arg, 0, i));
+	while (arg[i] && arg[i] != '=')
+		i++;
+	return (ft_substr(arg, 0, i));
 }
 
-bool is_key_valid(char *key)
+bool	is_key_valid(char *key)
 {
-    int i;
+	int	i;
 
-    if(key[0] == 0)
-        return (false);
-    if(!(key[0] == '_' || isalpha(key[0])))
-        return (false);
-    i = 0;
-    while(key[++i])
-    {
-        if(!(key[i] == '_' || isalnum(key[i])))
-            return (false);
-    }
-    return (true);
+	if (key[0] == 0)
+		return (false);
+	if (!(key[0] == '_' || isalpha(key[0])))
+		return (false);
+	i = 0;
+	while (key[++i])
+	{
+		if (!(key[i] == '_' || isalnum(key[i])))
+			return (false);
+	}
+	return (true);
 }
-char    *get_export_value(char *arg, int key_length)
+char	*get_export_value(char *arg, int key_length)
 {
-    int value_length;
-    
-    if (arg[key_length] == 0)
-        return (NULL);
-    value_length = ft_strlen(arg) - key_length - 1;
-    return (ft_substr(arg, key_length + 1, value_length));
-}
+	int	value_length;
 
-void    export(Node** head, char **args)
-{
-    Node    *entry;
-    char    *key;
-    char    *value;
-    
-    if(args[1] == NULL)
-    {
-        get_env_export(*head);
-        return;
-    }
-    int i = 0;
-    while(args[++i])
-    {
-        key = get_export_key(args[i]);
-        if (!is_key_valid(key))
-            printf("'%s' is not a valid identifier.\n", args[i]);
-        
-        value = get_export_value(args[i], ft_strlen(key));
-
-        entry = get_env_entry(*head, key);
-
-        if (entry)
-        {
-            free(key);
-            if (value)
-            {
-                free(entry->value);
-                entry->value = value;    
-            }
-        }
-        else
-            lstadd_back(head, lst_new(key, value));
-        if(*head)
-            lst_new(key, value);
-        else
-            lstadd_back(head, lst_new(key, value));
-    }
-    
+	if (arg[key_length] == 0)
+		return (NULL);
+	value_length = ft_strlen(arg) - key_length - 1;
+	return (ft_substr(arg, key_length + 1, value_length));
 }
 
+void	export(Node **head, char **args)
+{
+	Node	*entry;
+	char	*key;
+	char	*value;
+	int		i;
+
+	if (args[1] == NULL)
+	{
+		get_env_export(*head);
+		return ;
+	}
+	i = 0;
+	while (args[++i])
+	{
+		key = get_export_key(args[i]);
+		if (!is_key_valid(key))
+			printf("'%s' is not a valid identifier.\n", args[i]);
+		value = get_export_value(args[i], ft_strlen(key));
+		entry = get_env_entry(*head, key);
+		if (entry)
+		{
+			free(key);
+			if (value)
+			{
+				free(entry->value);
+				entry->value = value;
+			}
+		}
+		else
+			lstadd_back(head, lst_new(key, value));
+		if (*head)
+			lst_new(key, value);
+		else
+			lstadd_back(head, lst_new(key, value));
+	}
+}

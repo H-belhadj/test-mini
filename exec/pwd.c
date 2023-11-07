@@ -16,7 +16,7 @@ void	ft_pwd(t_cmd *cmd)
 {
 	char	cwd[PATH_MAX];
 
-	(void) cmd;
+	(void)cmd;
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 		perror("getcwd");
 	getcwd(cwd, sizeof(cwd));
