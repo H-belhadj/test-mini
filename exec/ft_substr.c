@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/21 11:53:17 by hbelhadj          #+#    #+#             */
-/*   Updated: 2023/11/07 18:03:38 by hbelhadj         ###   ########.fr       */
+/*   Created: 2023/11/07 16:24:37 by hbelhadj          #+#    #+#             */
+/*   Updated: 2023/11/07 16:31:25 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_echo(t_cmd *cmd)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int	i;
-	int	flag;
+	char	*arr;
+	size_t	n;
 
-	i = 1;
-	flag = 1;
-	while (cmd->cmd_args[i])
+	if (!s)
+		return (NULL);
+	if (ft_strlen(s) < len)
+		len = ft_strlen(s);
+	arr = ft_calloc(len + 1, sizeof(char));
+	if (!arr)
+		return (NULL);
+	n = 0;
+	while (n < len && s[start + n])
 	{
-		if (ft_strncmp(cmd->cmd_args[i], "-n", 2) == 0)
-			flag = 0;
-		else
-			break ;
-		i++;
+		arr[n] = s[start + n];
+		n++;
 	}
-	while (cmd->cmd_args[i])
-	{
-		ft_putstr_fd(cmd->cmd_args[i], 1);
-		i++;
-		if (cmd->cmd_args[i])
-			write(1, " ", 1);
-	}
-	if (flag)
-		write(1, "\n", 1);
-	s_help.exit_status = 0;
+	return (arr);
 }

@@ -6,7 +6,7 @@
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:24:18 by omakran           #+#    #+#             */
-/*   Updated: 2023/11/02 21:34:32 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:04:17 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,24 @@ void	print_table_cmds(t_data_cmd *vars)
 	}
 }
 
-// void	handler(int sig)
-// {
-// 	if (sig == SIGINT || sig == SIGQUIT)
-// 	{
-// 		printf("\n");
-// 		rl_on_new_line();
-// 		rl_replace_line("", 0);
-// 		rl_redisplay();
-// 		return ;
-// 	}
-// }
+void	handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		s_help.exit_status = 1;
+		return ;
+	}
+	if(sig == SIGQUIT)
+	{
+		rl_redisplay();
+		s_help.exit_status = 1;
+		return ;
+	}
+}
 
 int	handle_unclosed_quots(char *line)
 {
@@ -96,8 +103,8 @@ int	main(int __unused argc, char __unused **argv, char __unused **env)
 
 	if(argc != 1)
 		return (1);
-	// signal(SIGINT, handler);
-	// signal(SIGQUIT, handler);
+	signal(SIGINT, handler);
+	signal(SIGQUIT, handler);
 	vars = ft_malloc(sizeof(t_data_cmd), 0, ALLOC, 0);
 	if (!vars)
 		exit(1);

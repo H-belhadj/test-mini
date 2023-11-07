@@ -6,7 +6,7 @@
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 10:43:36 by omakran           #+#    #+#             */
-/*   Updated: 2023/11/03 16:59:18 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:02:09 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ char    *expand(char *token)
             if (token[i + 1] && token[i + 1] == '?') {
                 var_value = ft_itoa(s_help.exit_status);
                 i++;
-            }else {
+            }
+			else
+			{
                 var_name = ft_substr(token, i + 1, var_size(token, i + 1));
                 var_value = getenv(var_name);
                 if (!var_value)

@@ -6,7 +6,7 @@
 /*   By: hbelhadj <hbelhadj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:24:21 by omakran           #+#    #+#             */
-/*   Updated: 2023/11/02 21:52:21 by hbelhadj         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:52:23 by hbelhadj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdlib.h>
+#include "/Users/hbelhadj/.brew/opt/readline/include/readline/readline.h"
 // # include </goinfre/hbelhadj/.brew/opt/readline/include>
 # include <string.h>
 # include <unistd.h>
@@ -146,7 +147,16 @@ char	*get_path(char *cmd, t_data_cmd *vars);
 void	execute_compund(t_data_cmd *cmd);
 void	ft_pwd(t_cmd *cmd);
 void    ft_unset2(Node* envp, char **args);
-bool is_key_valid(char *key);
+bool	is_key_valid(char *key);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+void	print_arr(char **arr);
+char	*get_key(Node *envp, char *key);
+Node	*get_env_entry(Node *envp, char *key);
+int		get_redir_type(t_cmd *cmd);
+int		build_in(t_data_cmd *vars);
+int		execut_builting(t_data_cmd *vars);
+void	execute_siple(t_data_cmd *cmd, char **env);
+void	child_exec(t_data_cmd *cmd, char *path, char **env);
 /*#################################################################*/
 
 /*###################### ERRORS FUNCTIONS #########################*/
